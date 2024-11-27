@@ -5,8 +5,7 @@ namespace console_StudentManageMentSystem_cs
     {
         public static void Main()
         {
-            StudentManagementSystem kake = new Student("01/12/1994");
-            Console.WriteLine(kake);
+            return;
         }
     }
 }

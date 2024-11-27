@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace console_StudentManageMentSystem_cs
 {
-    internal class Subject
+    internal class Subject : StudentManagementSystem
     {
-        
+
+        public Subject(string name)
+        {
+            SubjectName = name;
+            SubjectID = count + 1;
+            count++;
+        }
+
     }
 }

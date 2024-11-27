@@ -10,16 +10,19 @@ namespace console_StudentManageMentSystem_cs
 {
     internal class StudentManagementSystem
     {
-        //  class member fields
-        private string _dateOfBirth_; // dd.mm-yyyy
+        // Universal
+        protected int count;
+        //  Stuedent fields
+
+        private int _id_;
         private int _age_;
         private string _name_;
         private string _email_;
         private string _program_;
-        private int _id_;
+        private string _dateOfBirth_; // dd.mm-yyyy
 
-        //  Properties for the class fields
-        private string Birthday
+        //  Properties for students
+        protected string Birthday
         {
             get => _dateOfBirth_;
             set
@@ -28,9 +31,9 @@ namespace console_StudentManageMentSystem_cs
                 if (DateTime.Now > DateTime.Parse(value)) { _dateOfBirth_ = value;}
             }
         } 
-        private string Age
+        protected int Age
         {
-            get => Convert.ToString(_age_);
+            get => _age_;
             set
             {
                 if ( calculate_date(_dateOfBirth_) > 0)
@@ -40,7 +43,7 @@ namespace console_StudentManageMentSystem_cs
             }
         }
         
-        private string Name
+        protected string Name
         {
             get => _name_;
             set
@@ -52,7 +55,7 @@ namespace console_StudentManageMentSystem_cs
                 }
             }
         }
-        private string Email
+        protected string Email
         { 
             get => _email_;
             set
@@ -60,7 +63,7 @@ namespace console_StudentManageMentSystem_cs
                 _email_ = value;
             }
         }
-        private string Program
+        protected string Program
         {
             get => _program_;
             set
@@ -69,12 +72,62 @@ namespace console_StudentManageMentSystem_cs
 
             }
         }
-        private int StudentId 
+        protected int StudentId 
         { 
-            get;
-            set;
+            get => _id_;
+            set
+            {
+                _id_ = count + 1;
+            }
         }
 
+        // Subject fields
+        private int _creds_;
+        private int _subjectid_;
+        private string _subjectname_;
+
+        protected int Creds
+        {
+            get => _creds_;
+            set
+            {
+                _creds_ = value;
+            }
+        }
+        protected int SubjectID
+        { 
+            get => _subjectid_;
+            set
+            {
+                _subjectid_ = value;
+            }
+        }
+        protected string SubjectName { 
+            get => _subjectname_;
+            set
+            {
+                _subjectname_ = value;
+            }
+        }
+
+        // Characters
+        // references to a student 
+        // references to a subject
+        // value
+
+        private int calculate_credits(int d, int m)
+        {
+            /*
+             * Clarification of  this algorthm is based on google Gemini's calculations
+             * Where original Algorithm was introduced as Credits Value = Difficulty (Total Workload) * Weeks
+             *  CV = TW * Multiplier (0.1),  TW = Duration * weeks 
+             
+             */
+            //  Constant multiplier
+            float n = 0.1f;
+            int TW = d * m;
+            return (int)Math.Round(TW * n);
+        }
         private  int calculate_date(string bday)
         {
             // Initializing n days / year
