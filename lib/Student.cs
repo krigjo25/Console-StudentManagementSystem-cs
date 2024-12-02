@@ -5,9 +5,9 @@ namespace Console_StudentManagementSystem.lib
     {
         //  Student fields
         private float _ap;
-        private string _age;
-        private string _name;
-        private string _dateOfBirth;
+        private string _age = string.Empty;
+        private string _name = string.Empty;
+        private string _dateOfBirth = string.Empty;
 
         // Properties 
         private string Birthday
@@ -16,9 +16,14 @@ namespace Console_StudentManagementSystem.lib
             set
             {
                 //  Ensure that the Value is correctly formatted
-                if (DateTime.Now > DateTime.Parse(value)) { _dateOfBirth = value;}
+                if (DateTime.Now > DateTime.Parse(value))
+                {
+                    _dateOfBirth = value;
+                    InitializeAge(Birthday);
+                }
                 else { Console.WriteLine("Invalid date " + value); }
             }
+            
         }
         private Ms Base { get;}
         
@@ -36,12 +41,12 @@ namespace Console_StudentManagementSystem.lib
             }
         }
         
-        public float Ap
+        internal float Ap
         {
             get => _ap;
             set => _ap += value;
         }
-        public string Name
+        internal string Name
         {
             get => _name;
             set
@@ -57,23 +62,19 @@ namespace Console_StudentManagementSystem.lib
         }
         
         // Enrolled programs
-        public List <string> Enrolled = new List<string>(); 
-        
-        public Dictionary<string, string> VerifiedPrograms = new Dictionary<string, string>();
+        public readonly List <string> Enrolled = new List<string>(); 
+        public readonly Dictionary<string, string> VerifiedPrograms = new Dictionary<string, string>();
 
-        public Student(string name, string bday, string[] prog, decimal points,  Ms obj)
+        public Student(string name, string dateofbirth, string[] prog, decimal points,  Ms obj)
         {
             Base = obj;
             Name = name;
-            Birthday = bday;
+            Birthday = dateofbirth;
             _ap = (float)points;
-            
-            InitializeAge(Birthday);
             InitializeAdmissionPoints(Convert.ToInt32(Age), 10);
             
             EnrollProgram(prog);
             VerifyProgram();
-
             obj.PushStudent(this);
         }
         
@@ -91,8 +92,7 @@ namespace Console_StudentManagementSystem.lib
         {
                 foreach (var element in prog)
                 {
-                    //  Ensure that the program is valid
-                    // Ensure that the Student has enough Admission points to enroll in the program
+                    // Ensure that the program is valid and the Student has enough Admission points to enroll in the program
                     if (Base.Subjects.Exists(x => x.Name == element && x.Creds <= Ap))
                     {
                         Enrolled.Add(element);
@@ -103,7 +103,7 @@ namespace Console_StudentManagementSystem.lib
         {
             if (Enrolled.Count > 0)
             {
-                Assesments assesments = new Assesments(this, Base);
+                var assesments = new Assessments(this, Base);
             }
         }
         

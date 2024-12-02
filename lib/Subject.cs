@@ -2,21 +2,11 @@
 {
     internal class Subject : Ms
     {
-        private int _creds;
-        private string _name;
-        
-        public int Creds
-        {
-            get => _creds;
-            set => _creds = value;
-        }
-        
-        public string Name { 
-            get => _name;
-            set => _name = value;
-        }
-        
-        public Subject(string name, int d, int w, Ms obj)
+        public int Creds { get; set; }
+
+        public string Name { get; set; }
+
+        private Subject(string name, int d, int w)
         {
             Name = name;
             Creds = calculate_credits(d, w);
@@ -25,7 +15,7 @@
         
         public static void InitializeSubject(string arg, int arg1, int arg2, Ms @base)
         {
-            Subject subject = new Subject(arg, arg1, arg2, @base);
+            var subject = new Subject(arg, arg1, arg2);
             @base.PushSubject(subject);
         }
 

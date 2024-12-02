@@ -4,9 +4,9 @@
     {
         
         // Initializing a List of objects
-        public List<Student> Students = [];
-        public List<Subject> Subjects = [];
-        private List<Assesments> Assesments =[];
+        public readonly List<Student> Students = [];
+        public readonly List<Subject> Subjects = [];
+        private readonly List<Assessments> _assessmentList = [];
 
        public void PushStudent(Student student)
        {
@@ -16,21 +16,22 @@
        {
            Subjects.Add(subject);
        }
-       public void PushAssessments(Assesments assesments)
+
+       protected void PushAssessments(Assessments assessments)
        {
-           Assesments.Add(assesments);
+           _assessmentList.Add(assessments);
        }
-        protected int calculate_date(string arg)
-        {
-            // Initializing constant devider
-            const int n = 365;
+       protected static int calculate_date(string arg)
+       { 
+           // Initializing constant devider
+           const int n = 365;
 
             //  Fetch todays date
-            DateTime today = DateTime.Today;
-            DateTime date = DateTime.Parse(arg);
+            var today = DateTime.Today;
+            var date = DateTime.Parse(arg);
 
             //  Calculate the difference between the two dates
-            TimeSpan diff = today.Date - date.Date ;
+            var diff = today.Date - date.Date ;
 
             //  Ensure that the user's day is less than todays day.
             if ( today.Month < date.Month || (today.Month == date.Month && today.Day < date.Day) )

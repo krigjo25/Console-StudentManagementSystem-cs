@@ -6,23 +6,26 @@ namespace Console_StudentManagementSystem
     {
         public static void Main()
         {
-            // Initialize a List of students, List of Subjects and List of Assesments
+            // Initialize a List of students, List of Subjects and List of Assessments
             // Initalize a MS class
             Ms ms = new Ms();
+            //var array = ProgramIntroduction();
 
-
+            
             // Initialize the Subjects
+            Console.WriteLine("Initializing Subjects..");
             Subject.InitializeSubject("Introduction to Python Development", 135, 24, ms);
             Subject.InitializeSubject("Math R1", 140, 48, ms);
 
             // user Admission points
             int ap = 100;//(int)Math.Round(3.25);
             // Initialize the Students
+            Console.WriteLine("Initializing Student..");
             Student student = new Student("Kriss", "02/25/1994", ["Math R1","Introduction to Python Development" ], ap, ms);
-            //Student.InitializeStudent("Terje", "02/25/1994", "Introduction to Python development",ap, ms);
+            
             // Print the information
             PrintInfo();
-
+            
             void PrintInfo()
             {
                 int k = 20;
@@ -49,6 +52,28 @@ namespace Console_StudentManagementSystem
                 }
                 
             }
+
+            string[] ProgramIntroduction()
+            {
+                while (true)
+                {
+                    //  Introduce the program
+                    Console.WriteLine("Welcome to the Student Management System");
+                    Console.WriteLine("This program is designed to help you manage students and their assessments");
+                    Console.WriteLine("Please type in the following information of the student you would like to add to the system...");
+                    
+                    var name = Console.ReadLine(); // kristoffer
+                    var date = Console.ReadLine(); // 02/11/1994
+                    var programs = Console.ReadLine(); // string
+                    var ap = Console.ReadLine(); // floated value
+                    
+                    // Name input //
+
+                }
+
+            }
+
         }
+        
     }
 }
