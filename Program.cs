@@ -25,52 +25,43 @@ namespace Console_StudentManagementSystem
             
             // Print the information
             PrintInfo();
-            
+            return;
+
             void PrintInfo()
             {
-                int k = 20;
+                int j = 0;
+                const int k = 20;
                 foreach (var student in ms.Students)
                 {
+                    //  Initialize the string variables
                     string program = "";
                     string verified = "";
+                    
+                    // Print the enrolled programs
                     for (int i = 0; i < student.Enrolled.Count; i++)
                     {
-                        program += i < student.Enrolled.Count-1 ? $" \"{student.Enrolled[i]}\", " : $"\"{student.Enrolled[i]}\".";
+                        program += i < student.Enrolled.Count-1 
+                            ? $" \"{student.Enrolled[i]}\", " 
+                            : $"\"{student.Enrolled[i]}\".";
                     }
 
-                    int j = 0;
-                    foreach (KeyValuePair<string, string> entry in student.VerifiedPrograms) {
-                        verified += j < student.VerifiedPrograms.Count -1
-                            ? $"{entry.Key} with the Assessment, {entry.Value},\n"
-                            : $"{entry.Key} with the Assessment, {entry.Value}.";
-                        j++;
+                    
+                    // Print the verified programs
+                    while(j < student.VerifiedPrograms.Count)
+                    {
+                        foreach (var (key, value) in student.VerifiedPrograms)
+                        {
+                            verified += j < student.VerifiedPrograms.Count - 1
+                                ? $"{key} with the Assessment, {value},\n"
+                                : $"{key} with the Assessment, {value}.";
+                            j++;
+                        }
                     }
                     Console.WriteLine(new string('*', k));
                     Console.WriteLine("Student Card");
                     Console.WriteLine($"Student ID : {ms.Students.Count}\nThe Student's name is {student.Name}.\n{student.Name} is {student.Age} years old.\nProgram enrolled : {program}\nCurrent Admission Points: {student.Ap}\n{student.Name}  has earned an assesment in:\n{verified}\n");
                     Console.WriteLine(new string('*', k));    
                 }
-                
-            }
-
-            string[] ProgramIntroduction()
-            {
-                while (true)
-                {
-                    //  Introduce the program
-                    Console.WriteLine("Welcome to the Student Management System");
-                    Console.WriteLine("This program is designed to help you manage students and their assessments");
-                    Console.WriteLine("Please type in the following information of the student you would like to add to the system...");
-                    
-                    var name = Console.ReadLine(); // kristoffer
-                    var date = Console.ReadLine(); // 02/11/1994
-                    var programs = Console.ReadLine(); // string
-                    var ap = Console.ReadLine(); // floated value
-                    
-                    // Name input //
-
-                }
-
             }
 
         }

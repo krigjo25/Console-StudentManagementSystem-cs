@@ -13,6 +13,7 @@
             this.student = student;
             Base = obj;
 
+            //  Initialize the grades
             foreach (var element in student.Enrolled)
             {
                 InitializeGrade(element, r.Next(0, 100));

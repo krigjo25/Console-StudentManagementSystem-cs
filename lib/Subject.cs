@@ -10,7 +10,6 @@
         {
             Name = name;
             Creds = calculate_credits(d, w);
-            
         }
         
         public static void InitializeSubject(string arg, int arg1, int arg2, Ms @base)
