@@ -10,6 +10,7 @@ namespace Console_StudentManagementSystem.lib
         private string _dateOfBirth = string.Empty;
 
         // Properties 
+        private Ms Base { get; set; }
         private string Birthday
         {
             get => _dateOfBirth;
@@ -25,8 +26,6 @@ namespace Console_StudentManagementSystem.lib
             }
             
         }
-        private Ms Base { get;}
-        
         internal string Age
         {
             get => _age;
@@ -40,7 +39,6 @@ namespace Console_StudentManagementSystem.lib
                 }
             }
         }
-        
         internal float Ap
         {
             get => _ap;
@@ -62,20 +60,20 @@ namespace Console_StudentManagementSystem.lib
         }
         
         // Enrolled programs
-        public readonly List <string> Enrolled = new List<string>(); 
+        public readonly List <string> Enrolled = []; 
         public readonly Dictionary<string, string> VerifiedPrograms = new Dictionary<string, string>();
 
-        public Student(string name, string dateofbirth, string[] prog, decimal points,  Ms obj)
+
+        public Student(string name, string dateofbirth, List<string> prog, decimal points, Ms obj)
         {
             Base = obj;
             Name = name;
             Birthday = dateofbirth;
-            _ap = (float)points;
+            _ap = (float) points;
             InitializeAdmissionPoints(Convert.ToInt32(Age), 10);
             
             EnrollProgram(prog);
             VerifyProgram();
-            obj.PushStudent(this);
         }
         
         private void InitializeAge(string bday)
@@ -88,16 +86,13 @@ namespace Console_StudentManagementSystem.lib
         {
             Ap += (0.26f * age) + points;
         }
-        private void EnrollProgram(string[] prog)
+        private void EnrollProgram(List<string> prog)
         {
-                foreach (var element in prog)
-                {
-                    // Ensure that the program is valid and the Student has enough Admission points to enroll in the program
-                    if (Base.Subjects.Exists(x => x.Name == element && x.Creds <= Ap))
-                    {
-                        Enrolled.Add(element);
-                    }
-                }
+            // Kake 
+            foreach (var element in from element in prog from sub in Base.Subjects where sub.Name == element select element)
+            {
+                Enrolled.Add(element);
+            }
         }
         private void VerifyProgram()
         {

@@ -2,69 +2,103 @@
 
 namespace Console_StudentManagementSystem
 {
-    class ConsoleApp
+    internal abstract class ConsoleApp
     {
         public static void Main()
         {
-            // Initialize a List of students, List of Subjects and List of Assessments
-            // Initalize a MS class
-            Ms ms = new Ms();
-            //var array = ProgramIntroduction();
+            // Initialize the array of strings
+            var arg = new string[3];
+            var program = new List<string>();
+            string[] array = ["name", "Date of birth (mm/dd/yyyy)", "Admission Points", "Programs (separated by commas)"];
+            Console.Clear();
 
-            
-            // Initialize the Subjects
-            Console.WriteLine("Initializing Subjects..");
-            Subject.InitializeSubject("Introduction to Python Development", 135, 24, ms);
-            Subject.InitializeSubject("Math R1", 140, 48, ms);
-
-            // user Admission points
-            int ap = 100;//(int)Math.Round(3.25);
-            // Initialize the Students
-            Console.WriteLine("Initializing Student..");
-            Student student = new Student("Kriss", "02/25/1994", ["Math R1","Introduction to Python Development" ], ap, ms);
-            
-            // Print the information
-            PrintInfo();
-            return;
-
-            void PrintInfo()
-            {
-                int j = 0;
-                const int k = 20;
-                foreach (var student in ms.Students)
+            int index = 0;
+            while (index < array.Length)
+            { 
+                Console.WriteLine($"Enter the {array[index]} of Student");
+                var input = Console.ReadLine();
+                
+                if (input != null)
                 {
-                    //  Initialize the string variables
-                    string program = "";
-                    string verified = "";
-                    
-                    // Print the enrolled programs
-                    for (int i = 0; i < student.Enrolled.Count; i++)
+                    if (index == array.Length - 1)
                     {
-                        program += i < student.Enrolled.Count-1 
-                            ? $" \"{student.Enrolled[i]}\", " 
-                            : $"\"{student.Enrolled[i]}\".";
+                        program.AddRange(input.Split(","));
+                        break;
                     }
-
+                    arg[index] = input;
+                    index++;
                     
-                    // Print the verified programs
-                    while(j < student.VerifiedPrograms.Count)
-                    {
-                        foreach (var (key, value) in student.VerifiedPrograms)
-                        {
-                            verified += j < student.VerifiedPrograms.Count - 1
-                                ? $"{key} with the Assessment, {value},\n"
-                                : $"{key} with the Assessment, {value}.";
-                            j++;
-                        }
-                    }
-                    Console.WriteLine(new string('*', k));
-                    Console.WriteLine("Student Card");
-                    Console.WriteLine($"Student ID : {ms.Students.Count}\nThe Student's name is {student.Name}.\n{student.Name} is {student.Age} years old.\nProgram enrolled : {program}\nCurrent Admission Points: {student.Ap}\n{student.Name}  has earned an assesment in:\n{verified}\n");
-                    Console.WriteLine(new string('*', k));    
                 }
+            }
+            Console.WriteLine(arg);
+
+            // Initialize a MS class
+            var ms = new Ms();
+            ms.ProgramIntroduction();
+            // Initialize the Subjects
+            ms.InitializeSubject("Math R1", 140, 48);
+            ms.InitializeSubject("Introduction to Python Development", 135, 24);
+            
+            
+            // Initialize the Student
+            ms.InitializeStudent(arg, program);
+
+            // Print the information
+            PrintInfoStudent(ms);
+        }
+
+        
+        private static void PrintInfoStudent(Ms @base)
+        {
+            int j = 0; 
+            const int k = 20; 
+            
+            foreach (var student in @base.Students)
+            {
+                //  Initialize the string variables
+                string program = FetchEnrolledPrograms(student);;
+                string verified = FetchVerifiedPrograms(student);
+                    
+                
+                // Print the verified programs
+                
+                Console.WriteLine(new string('*', k));
+                string text =
+                    $"Student CardStudent ID : {@base.Students.Count}\nThe Student's name is {student.Name}.\n{student.Name} is {student.Age} years old.\nProgram enrolled : {program}\nCurrent Admission Points: {student.Ap}\n{student.Name}  has earned an assessment in: {verified}";
+                @base.ConsoleTypeEffect(text);
+                Console.WriteLine(new string('*', k));    
             }
 
         }
         
+        private static string FetchEnrolledPrograms(Student student)
+        {
+            string program = "";
+            foreach (var element in student.Enrolled)
+            {
+                program += element + ", ";
+            }
+
+            return program;
+        }
+        private static string FetchVerifiedPrograms(Student student)
+        {
+            int i = 0;
+            string verified = "";
+            
+            while(i < student.VerifiedPrograms.Count)
+            {
+                foreach (var (key, value) in student.VerifiedPrograms)
+                {
+                    verified += i < student.VerifiedPrograms.Count - 1
+                        ? $"{key} with the Assessment, {value},\n"
+                        : $"{key} with the Assessment, {value}.";
+                    i++;
+                }
+            }
+
+
+            return verified;
+        }
     }
 }

@@ -6,16 +6,10 @@
 
         public string Name { get; set; }
 
-        private Subject(string name, int d, int w)
+        protected internal Subject(string name, int d, int w)
         {
             Name = name;
             Creds = calculate_credits(d, w);
-        }
-        
-        public static void InitializeSubject(string arg, int arg1, int arg2, Ms @base)
-        {
-            var subject = new Subject(arg, arg1, arg2);
-            @base.PushSubject(subject);
         }
 
         // Calculate the Credentails
@@ -32,7 +26,7 @@
 
              */
 
-            //  UNS's constant multiplier
+            //  USN's constant multiplier
             const float n = 0.0015f;
             
             int tw = d * w;
