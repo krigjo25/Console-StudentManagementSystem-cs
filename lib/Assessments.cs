@@ -2,12 +2,13 @@
 {
     internal class Assessments : Ms
     {
-        private Student student { set; get; }
+        private Student student { get; }
+        private Ms Base { get; }
         private readonly Dictionary<string, string> _programs = [];
-        private Ms Base { set; get; }
-        public Assessments(Student student, Ms obj)
+        public Assessments(Student student,Ms obj)
         {
             var r = new Random();
+            //Base = obj;
             Base = obj;
             this.student = student;
 
@@ -21,9 +22,8 @@
             PushAssessments(this);
         }
 
-        void InitializeGrade(string element, int score)
+        private void InitializeGrade(string element, int score)
         {
-            Console.WriteLine($"Assesment : {element}, {score}");
             string[] ch =
             [
                 "A", "A-", "B+",
@@ -78,11 +78,9 @@
         {
             foreach (var sub in Base.Subjects)
             {
-                Console.WriteLine($"Assesment : {sub.Name}");
                 //  Transfer the credits to the student
                 foreach (var (key, value) in _programs)
                 {
-                    Console.WriteLine("Assessments: keys : {key}, value : {value}");
                     if (sub.Name == key && value != "F")
                     {
                         student.Ap += sub.Creds;

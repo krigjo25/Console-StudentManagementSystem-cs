@@ -10,7 +10,7 @@ namespace Console_StudentManagementSystem.lib
         private string _dateOfBirth = string.Empty;
 
         // Properties 
-        private Ms Base { get; set; }
+        private Ms Base { get;}
         private string Birthday
         {
             get => _dateOfBirth;
@@ -61,7 +61,7 @@ namespace Console_StudentManagementSystem.lib
         
         // Enrolled programs
         public readonly List <string> Enrolled = []; 
-        public readonly Dictionary<string, string> VerifiedPrograms = new Dictionary<string, string>();
+        public readonly Dictionary<string, string> VerifiedPrograms = [];
 
 
         public Student(string name, string dateofbirth, List<string> prog, decimal points, Ms obj)
@@ -98,7 +98,7 @@ namespace Console_StudentManagementSystem.lib
         {
             if (Enrolled.Count > 0)
             {
-                var assesments = new Assessments(this, Base);
+                var unused = new Assessments(this, Base);
             }
         }
         

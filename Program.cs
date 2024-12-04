@@ -13,6 +13,15 @@ namespace Console_StudentManagementSystem
             Console.Clear();
 
             int index = 0;
+
+            // Initialize a MS class
+            var ms = new Ms();
+            ms.ProgramIntroduction();
+            
+            // Initialize the Subjects
+            ms.InitializeSubject("Math R1", 140, 48);
+            ms.InitializeSubject("Introduction to Python Development", 135, 24);
+            
             while (index < array.Length)
             { 
                 Console.WriteLine($"Enter the {array[index]} of Student");
@@ -27,19 +36,8 @@ namespace Console_StudentManagementSystem
                     }
                     arg[index] = input;
                     index++;
-                    
                 }
             }
-            Console.WriteLine(arg);
-
-            // Initialize a MS class
-            var ms = new Ms();
-            ms.ProgramIntroduction();
-            // Initialize the Subjects
-            ms.InitializeSubject("Math R1", 140, 48);
-            ms.InitializeSubject("Introduction to Python Development", 135, 24);
-            
-            
             // Initialize the Student
             ms.InitializeStudent(arg, program);
 
