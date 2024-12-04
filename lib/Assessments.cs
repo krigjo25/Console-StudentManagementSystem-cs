@@ -2,22 +2,19 @@
 {
     internal class Assessments : Ms
     {
-        private Student student { get; }
-        private Ms Base { get; }
+        private readonly List<Student> _students;
         private readonly Dictionary<string, string> _programs = [];
-        public Assessments(Student student,Ms obj)
+        public Assessments(List<Student> students)
         {
+            _students = students;
             var r = new Random();
-            //Base = obj;
-            Base = obj;
-            this.student = student;
-
-            //  Initialize the grades
-            foreach (var element in student.Enrolled)
+            
+            //  Fetch the students
+            foreach (var element in _students.SelectMany(student => student.Enrolled))
             {
                 InitializeGrade(element, r.Next(0, 100));
             }
-
+            
             TransferAdmissionPoints();
             PushAssessments(this);
         }
@@ -76,15 +73,18 @@
 
         private void TransferAdmissionPoints()
         {
-            foreach (var sub in Base.Subjects)
+            foreach (var student in _students)
             {
-                //  Transfer the credits to the student
-                foreach (var (key, value) in _programs)
+                foreach (var element in  student.Subjects)
                 {
-                    if (sub.Name == key && value != "F")
+                    //  Transfer the credits to the student
+                    foreach (var (key, value) in _programs)
                     {
-                        student.Ap += sub.Creds;
-                        student.VerifiedPrograms.Add(key, value);
+                        if (element.Name == key && value != "F")
+                        {
+                            student.Ap += element.Creds;
+                            student.VerifiedPrograms.Add(key, value);
+                        }
                     }
                 }
             }

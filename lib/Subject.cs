@@ -2,9 +2,9 @@
 {
     internal class Subject : Ms
     {
-        public int Creds { get; set; }
+        public int Creds { get;}
 
-        public string Name { get; set; }
+        public string Name { get;}
 
         protected internal Subject(string name, int d, int w)
         {

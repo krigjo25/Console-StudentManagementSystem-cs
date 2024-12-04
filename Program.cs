@@ -13,14 +13,6 @@ namespace Console_StudentManagementSystem
             Console.Clear();
 
             int index = 0;
-
-            // Initialize a MS class
-            var ms = new Ms();
-            ms.ProgramIntroduction();
-            
-            // Initialize the Subjects
-            ms.InitializeSubject("Math R1", 140, 48);
-            ms.InitializeSubject("Introduction to Python Development", 135, 24);
             
             while (index < array.Length)
             { 
@@ -38,65 +30,36 @@ namespace Console_StudentManagementSystem
                     index++;
                 }
             }
-            // Initialize the Student
-            ms.InitializeStudent(arg, program);
+            // Initialize an MS class
+            var student = new Student(arg,program);
+            ProgramIntroduction();
+            
+            // Initialize the Subjects
 
             // Print the information
-            PrintInfoStudent(ms);
+            student.PrintInfo();
         }
 
-        
-        private static void PrintInfoStudent(Ms @base)
+        private static void ProgramIntroduction()
         {
-            int j = 0; 
-            const int k = 20; 
-            
-            foreach (var student in @base.Students)
-            {
-                //  Initialize the string variables
-                string program = FetchEnrolledPrograms(student);;
-                string verified = FetchVerifiedPrograms(student);
-                    
-                
-                // Print the verified programs
-                
-                Console.WriteLine(new string('*', k));
-                string text =
-                    $"Student CardStudent ID : {@base.Students.Count}\nThe Student's name is {student.Name}.\n{student.Name} is {student.Age} years old.\nProgram enrolled : {program}\nCurrent Admission Points: {student.Ap}\n{student.Name}  has earned an assessment in: {verified}";
-                @base.ConsoleTypeEffect(text);
-                Console.WriteLine(new string('*', k));    
-            }
-
+            const string text = """
+                                Welcome to the Student Management System !
+                                This program is designed to manage students and their programs
+                                The program will initialize a list of subjects and students
+                                The program will then enroll the students in the subjects
+                                The program will then verify the students' programs
+                                The program will then print the students' information
+                                """;
+            ConsoleTypeEffect(text);
         }
-        
-        private static string FetchEnrolledPrograms(Student student)
+        public static void ConsoleTypeEffect(string text)
         {
-            string program = "";
-            foreach (var element in student.Enrolled)
+            foreach (char c in text)
             {
-                program += element + ", ";
+                Console.Write(c);
+                Thread.Sleep(75);
             }
-
-            return program;
-        }
-        private static string FetchVerifiedPrograms(Student student)
-        {
-            int i = 0;
-            string verified = "";
-            
-            while(i < student.VerifiedPrograms.Count)
-            {
-                foreach (var (key, value) in student.VerifiedPrograms)
-                {
-                    verified += i < student.VerifiedPrograms.Count - 1
-                        ? $"{key} with the Assessment, {value},\n"
-                        : $"{key} with the Assessment, {value}.";
-                    i++;
-                }
-            }
-
-
-            return verified;
+            Console.Write("\n");
         }
     }
 }
