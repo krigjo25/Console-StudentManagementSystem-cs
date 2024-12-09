@@ -7,59 +7,80 @@ namespace Console_StudentManagementSystem
         public static void Main()
         {
             // Initialize the array of strings
-            var arg = new string[3];
-            var program = new List<string>();
-            string[] array = ["name", "Date of birth (mm/dd/yyyy)", "Admission Points", "Programs (separated by commas)"];
-            Console.Clear();
-
-            int index = 0;
-            
-            while (index < array.Length)
-            { 
-                Console.WriteLine($"Enter the {array[index]} of Student");
-                var input = Console.ReadLine();
-                
-                if (input != null)
-                {
-                    if (index == array.Length - 1)
-                    {
-                        program.AddRange(input.Split(","));
-                        break;
-                    }
-                    arg[index] = input;
-                    index++;
-                }
-            }
             // Initialize an MS class
-            var student = new Student(arg,program);
-            ProgramIntroduction();
-            
-            // Initialize the Subjects
+            var ms = new Ms();
 
-            // Print the information
-            student.PrintInfo();
+            string[] array =
+                ["name", "Date of birth (mm/dd/yyyy)", "Admission Points", "Programs (separated by commas)"];
+
+
+            ms.InitializeSubject();
+            Console.Clear();
+            ProgramIntroduction();
+            InitializeStudent(0, 2, array, ms);
+            ms.PrintInfo();
         }
 
         private static void ProgramIntroduction()
         {
             const string text = """
-                                Welcome to the Student Management System !
-                                This program is designed to manage students and their programs
-                                The program will initialize a list of subjects and students
-                                The program will then enroll the students in the subjects
-                                The program will then verify the students' programs
+                                Welcome to krigjo25's Vocational college !
+                                About the program : The program will initialize a list of subjects, and students,
+                                Then enroll the students in the chosen subject, The program will do a check on student's
+                                final assessment, if the student has passed the Student will receive the  ap ( Admission Points)
                                 The program will then print the students' information
                                 """;
             ConsoleTypeEffect(text);
         }
+
         public static void ConsoleTypeEffect(string text)
         {
             foreach (char c in text)
             {
                 Console.Write(c);
-                Thread.Sleep(75);
+                Thread.Sleep(3);
             }
+
             Console.Write("\n");
+        }
+
+        private static void InitializeStudent(int counter, int n, string[] array, Ms obj)
+        {
+            var arg = new string[3];
+            var program = new List<string>();
+
+            while (counter < n)
+            {
+                foreach (var element in array)
+                {
+                    Console.WriteLine($"Enter the {element} of Student");
+                    if (element.ToLower().Contains("programs"))
+                        foreach (var sub in obj.Subjects)
+                            ConsoleTypeEffect(
+                                $"Subject: {sub.Name} Student require least {sub.AdmissionScore}AP. If the student has a passing grade in this program, the student will recieve {sub.Creds} Creds");
+
+                    var input = Console.ReadLine();
+
+                    if (input != null)
+                    {
+                        if (element.ToLower().Contains("programs"))
+                        {
+                            ConsoleTypeEffect(input);
+                            program.AddRange(input.Split(","));
+                            break;
+                        }
+
+                        arg[counter] = input;
+                        counter++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                obj.PushStudent(new Student(arg, program));
+            }
         }
     }
 }
