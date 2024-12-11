@@ -100,6 +100,7 @@ namespace Console_StudentManagementSystem.lib
                      where sub.Name == element && sub.AdmissionScore <= Ap
                      select element)
             {
+                Console.WriteLine(element);
                 Enrolled.Add(element);
             }
         }

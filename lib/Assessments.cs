@@ -76,15 +76,9 @@
                 //  Transfer the credits to the student
                 foreach (var (key, value) in _programs)
                 {
-                    if (element.Name == key) //&& value != "F")
-                    {
-                        if (value != "F")
-                        {
-                            student.Ap += element.Creds;
-                        }
-
-                        student.VerifiedPrograms.Add(key, value);
-                    }
+                    // Ensuring the Enrolled subject is a subject and the Assessment is a passing grade
+                    student.Ap = element.Name == key && value != "F" ? element.Creds : 0;
+                    student.VerifiedPrograms.Add(key, value);
                 }
             }
         }

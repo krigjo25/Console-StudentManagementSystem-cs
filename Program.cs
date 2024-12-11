@@ -24,8 +24,9 @@ namespace Console_StudentManagementSystem
         private static void ProgramIntroduction()
         {
             const string text = """
-                                Welcome to krigjo25's Vocational college !
-                                About the program : The program will initialize a list of subjects, and students,
+                                Welcome to krigjo25's Vocational college...
+
+                                Throught the initialization the program will Ainitialize a list of subjects for the School, and students,
                                 Then enroll the students in the chosen subject, The program will do a check on student's
                                 final assessment, if the student has passed the Student will receive the  ap ( Admission Points)
                                 The program will then print the students' information
