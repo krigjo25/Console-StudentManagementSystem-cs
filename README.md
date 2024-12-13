@@ -24,7 +24,7 @@ Students can be displayed.
 
 ## License
 
-This application is under [The No Licence](./LICENCE)
+This application is under [The Unlicense](./LICENCE)
 
 ## Notes from the developer
 
