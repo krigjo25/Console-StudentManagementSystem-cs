@@ -4,7 +4,6 @@ that allows you to manage students in a school. As an teacher
 Students can be displayed.
 
 ## Features
-
 - [✔️] Adding a Student
 - [✔️]Display Student
 
@@ -23,11 +22,9 @@ Students can be displayed.
 5. Done!
 
 ## License
-
 This application is under [The Unlicense](./LICENCE)
 
 ## Notes from the developer
-
 Created with love for programming, thanks for reading.
 I hope you'll have a beautiful day as you are!,<br>
 @krigjo25
