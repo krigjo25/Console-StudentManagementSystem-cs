@@ -1,17 +1,17 @@
 # Console-StudentManagementSystem
-
-## Overview
 **Console-StudentManagementSystem** is a simple console application
 that allows you to manage students in a school. As an teacher
 Students can be displayed.
 
 ## Features
+
+- [✔️] Adding a Student
 - [✔️]Display Student
+
 
 ## Requirements
 - Visual Studio 2019 > / Rider 2020.3 >
 - .NET Core 8.0
-
 
 ## Installation
 1. Clone the repository
@@ -23,9 +23,11 @@ Students can be displayed.
 5. Done!
 
 ## License
-see the license file for more information.
 
-## User Guide
+This application is under [The No Licence](./LICENCE)
 
-### Contact
-For any feedbacks or questions, feel free to contact me.
+## Notes from the developer
+
+Created with love for programming, thanks for reading.
+I hope you'll have a beautiful day as you are!,<br>
+@krigjo25
