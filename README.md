@@ -3,7 +3,7 @@
 that allows you to manage students in a school. As an teacher
 Students can be displayed.
 
-The project was created as a part of an assignment for [Get Academy](https://getacademy.no)<br>
+The project was created as an assignment for [Get Academy](https://getacademy.no)<br>
 Please respect and keep
 the [Academic Honesty Integerty](https://ctl.columbia.edu/resources-and-technology/resources/academic-integrity/) in
 mind.<br>
